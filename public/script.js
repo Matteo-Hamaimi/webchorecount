@@ -1,6 +1,8 @@
 const bar =   document.getElementById('bar');
 const close = document.getElementById('close')
 const nav =   document.getElementById('navbar');
+const userloged="danny-grn";
+var errorsignin=false;
 
 if (bar) {
     bar.addEventListener('click', () => {
@@ -13,7 +15,19 @@ if (close) {
     })
 }
 
+const changehtlm = (json1,c) => {
+  let cat_list = document.querySelector(".row");
 
+  for (catI in json1){
+    const cat = json1[catI]
+    console.log(cat.id_chores);
+      if (cat.username==c){
+        cat_list.innerHTML='';
+          cat_list.innerHTML += '<tbody><tr><td>'+cat.id_chores+'</td><td>'+cat.chore_name+'</td><td>'+cat.descr+'</td><td>'+cat.room_name+'</td></tbody><div>'
+      }
+  }
+
+}
 const pingApi = () => {
   console.log({ value: document.getElementById("inputNumber").value });
   fetch(
@@ -25,26 +39,28 @@ const pingApi = () => {
 };
 
 const executeFunction = () => {
-  var functionSwitch = document.getElementById("request").value;
-  switch (functionSwitch) {
-    case "creation": {
       getCreation();
-      break;
-    }
-    case "read": {
-      getRead();
-      break;
-    }
-    case "update": {
-      getUpdate();
-      break;
-    }
-    case "delete": {
-      getDelete();
-      break;
-    }
-  }
 };
+const executeFunction1 = () => {
+  getCreation();
+};
+const executeFunction2 = () => {
+  getseechores();
+};
+
+const getlogin=() =>{
+  var pword = document.getElementById("pword").value;
+  var username = document.getElementById("username").value;
+  if ("/users/username"!=null){
+  }
+}
+
+const getseechores=()=>{
+  fetch("/chores/")
+      .then((data) => data.json())
+      .then((data) => changehtlm(data,userloged));
+}
+
 
 const getRead = () => {
   var Id_User = document.getElementById("Id_User").value;
@@ -68,7 +84,7 @@ const getRead = () => {
       .then((data) => data.json())
       .then((data) => alert(JSON.stringify(data)));
   } else {
-    fetch("/users/")
+    fetch("/chores/")
       .then((data) => data.json())
       .then((data) => alert(JSON.stringify(data)));
   }
@@ -78,25 +94,26 @@ const getCreation = () => {
   var lastname = document.getElementById("Lastname").value;
   var firstname = document.getElementById("Firstname").value;
   var username = document.getElementById("username").value;
-  var Password = document.getElementById("Password").value;
+  var pword = document.getElementById("pword").value;
 
   var payload = {
     lastname: lastname,
     firstname: firstname,
     username: username,
-    password: Password
+    pword: pword
   };
 
   fetch("/users/", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(payload),
-  })
-    .then((res) => res.json())
-    .then((res) => alert(JSON.stringify(res)));
+  method: "POST",
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify(payload),
+})
+  .then((res) => res.json())
+  .then((res) => alert(JSON.stringify(res)));
+
 };
 
 const getDelete = () => {

@@ -8,7 +8,7 @@ class service {
         host: "localhost",
         port: 5432,
         user: "postgres",
-        password: "94400",
+        password: "Cobra2710",
         database: "ChoreCount",
         charset: "utf8",
       },
@@ -16,10 +16,17 @@ class service {
   }
 
   getUsers = (req, res) => {
-    console.log(req.body)
     this.pg("users").then((data) => {
       res.json(data);
     });
+  };
+
+  
+  getchores = (req, res) => {
+    this.pg("chores")
+      .then((data) => {
+        res.json(data);
+      });
   };
 
   getUsersByID = (req, res) => {
@@ -58,12 +65,19 @@ class service {
       });
   };
 
-  
+  getPword= (req, res) => {
+    const pword = req.params.pword;
+    this.pg("users")
+      .where({ pword })
+      .then((data) => {
+        res.json(data);
+      });
+  };
 
   createUsers = (req, res) => {
-    const { username, firstname, lastname, password } = req.body;
+    const { username, firstname, lastname, pword } = req.body;
     this.pg("users")
-      .insert({ username, firstname, lastname, password })
+      .insert({ username, firstname, lastname, pword })
       .then((data) => {
         console.log(data);
         res.json(data);

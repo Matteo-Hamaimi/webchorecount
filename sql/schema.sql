@@ -14,7 +14,7 @@ CREATE TABLE Users(
 CREATE TABLE Chores(
    Id_Chores INT,
    Chore_Name VARCHAR(250),
-   Description VARCHAR(350),
+   Descr VARCHAR(350),
    username VARCHAR(50) NOT NULL,
    room_name VARCHAR(50) NOT NULL,
    PRIMARY KEY(Id_Chores),

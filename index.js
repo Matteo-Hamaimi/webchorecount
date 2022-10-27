@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const port = 3000;
 const Service = require("./service.js");
+const service = require("./service.js");
 
 app.use(bodyParser.json());
 app.use(
@@ -17,6 +18,7 @@ app.get("/", (_, res) => {
   res.sendFile(path.join(__dirname + "/index.html"));
 });
 
+app.get("/chores",service.getchores)
 app.get("/users", Service.getUsers);
 app.get("/users/id_user=:Id_User", Service. getUsersByID);
 app.get("/users/username=:username", Service.getUsername);
