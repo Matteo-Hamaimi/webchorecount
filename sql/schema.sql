@@ -4,10 +4,10 @@ CREATE DATABASE ChoreCount;
 
 -- create a table
 CREATE TABLE Users(
-   username VARCHAR(50),
-   Firstname VARCHAR(50),
-   Lastname VARCHAR(50),
-   Password VARCHAR(50),
+   username VARCHAR(50) not null,
+   Firstname VARCHAR(50) not null,
+   Lastname VARCHAR(50) not null,
+   Pword VARCHAR(50) not null,
    PRIMARY KEY(username)
 );
 
@@ -16,6 +16,7 @@ CREATE TABLE Chores(
    Chore_Name VARCHAR(250),
    Description VARCHAR(350),
    username VARCHAR(50) NOT NULL,
+   room_name VARCHAR(50) NOT NULL,
    PRIMARY KEY(Id_Chores),
    FOREIGN KEY(username) REFERENCES Users(username)
 );
