@@ -1,9 +1,10 @@
+
 const bar =   document.getElementById('bar');
 const close = document.getElementById('close')
 const nav =   document.getElementById('navbar');
 var textDisplay=false;
-const userloged=1;
-var room_name;
+const userloged = localStorage.getItem('userloged');
+const room_name = localStorage.getItem('room_name');
 
 if (bar) {
     bar.addEventListener('click', () => {
@@ -63,7 +64,7 @@ const deletefunction=()=>{
   getseechores();
 }
 const kitchen = () => {
-   room_name="kitchen";
+  localStorage.setItem('room_name', "Kitchen");
 }
 const getlogin=() =>{
   var username = document.getElementById("username").value;
@@ -84,6 +85,7 @@ const LoginJB = (json1,c, c2) => {
       }
   }
   if (bool =='true'){
+    localStorage.setItem('room_name', "Kitchen");
     window.location.href="index.html";
   }
   else{
@@ -126,6 +128,7 @@ const signinJB = (json1,c) => {
       body: JSON.stringify(payload),
     })
       .then((res) => res.json());
+      localStorage.setItem('userloged', c);
     window.location.href="index.html";
   }
   else{
@@ -148,6 +151,7 @@ const getseechores=()=>{
 const getCreationChore = () => {
   var chore_name = document.getElementById("ChoreName").value;
   var descr = document.getElementById("Description").value;
+  alert(room_name);
   var payload = {
     chore_name: chore_name,
     descr: descr,
@@ -182,6 +186,7 @@ const getDelete = () => {
   })
     .then((res) => res.json())
 };
+
 
 
 const getUpdate = () => {

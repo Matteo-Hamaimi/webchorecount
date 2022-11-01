@@ -15,7 +15,7 @@ CREATE TABLE Chores(
    Id_Chores SERIAL PRIMARY KEY,
    Chore_Name VARCHAR(250) NOT NULL,
    Descr VARCHAR(350),
-   username VARCHAR(50) UNIQUE NOT NULL,
+   username VARCHAR(50) NOT NULL,
    room_name VARCHAR(50) NOT NULL,
    FOREIGN KEY(username) REFERENCES Users(username)
 );

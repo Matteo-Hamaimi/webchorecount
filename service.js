@@ -85,9 +85,9 @@ class service {
   };
 
 createChore = (req, res) => {
-  const {id_chores, chore_name, descr, username} = req.body;
+  const {id_chores, chore_name, descr, username,room_name} = req.body;
   this.pg("chores")
-  .insert({id_chores, chore_name, descr, username})
+  .insert({id_chores, chore_name, descr, username,room_name})
   .then((data) => {
     console.log(data);
     res.json(data);
